@@ -1,0 +1,70 @@
+@import '../assets/ext_lib/css/variable.scss';
+
+.app-container {
+  height: 100%;
+
+  .app-container-container {
+    height: 100%;
+    overflow: hidden;
+    background-color: transparent;
+
+    .app-container-sidenav {
+      width: max-content;
+      overflow: hidden;
+      z-index: 4;
+      background-color: transparent;
+      box-shadow: $boxShadow;
+      // z-index: 1;
+    }
+
+    .app-container-sidenav-content {
+      height: 100%;
+      overflow: auto;
+      background-color: transparent;
+
+      mat-toolbar {
+        height: 64px;
+        background-color: $primaryColor;
+        color: white;
+        box-shadow: $boxShadow;
+
+        .login-btn {
+          right: 1rem;
+          position: absolute;
+          border-radius: 5px;
+        }
+      }
+
+      .msg-panel {
+        width: fit-content;
+        padding: 10px;
+        position: absolute;
+        right: 2rem;
+        top: 5rem;
+        z-index: 100;
+        border-radius: 15px;
+        box-shadow: 0 0 10px 3px black;
+
+        mat-card-content {
+          p {
+            margin: 0 !important;
+          }
+        }
+      }
+
+      .info {
+        background-color: lightblue;
+      }
+
+      .success {
+        background-color: lightgreen;
+        color: blue !important;
+      }
+
+      .failure {
+        color: blue !important;
+        background-color: rgba(255, 0, 0, 0.849);
+      }
+    }
+  }
+}

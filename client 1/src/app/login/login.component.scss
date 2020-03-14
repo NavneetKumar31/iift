@@ -1,0 +1,60 @@
+.login-container {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  background-image: url('../../assets/imgs/bg/login_bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .home-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
+
+  .login-card {
+    width: fit-content;
+    top: 20%;
+    margin: 0 auto;
+    border-bottom-left-radius: 20%;
+    border-top-right-radius: 20%;
+    padding: 3rem;
+    opacity: 0.5;
+    background-color: #7777bb91;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .card-header-img {
+      text-align: center;
+
+      img {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+      }
+    }
+
+    form {
+      mat-form-field {
+        width: 100%;
+      }
+
+      .form-btn {
+        text-align: center;
+
+        button {
+          width: 100%;
+        }
+
+        p {
+          margin: 1rem auto;
+          margin-bottom: 0.3rem;
+        }
+      }
+    }
+  }
+}

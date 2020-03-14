@@ -1,0 +1,61 @@
+@import '../../assets/ext_lib/css/variable.scss';
+
+.header-container {
+  box-shadow: $boxShadow;
+  height: 100%;
+  background-color: #eee;
+
+  .profile-info-panel {
+    text-align: center;
+    margin: 0rem auto;
+    padding: 2rem 0;
+
+    .profile-pic {
+      padding: 0 2rem;
+
+      img {
+        max-width: 150px;
+        max-height: 150px;
+        border-radius: 50%;
+      }
+    }
+
+    button {
+      margin: 0.5rem auto;
+    }
+  }
+
+  .navigation-panel {
+    mat-list {
+      margin: 0;
+      padding: 0;
+
+      .active-list {
+        background-color: $primaryColor !important;
+        color: #fff !important;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+      }
+
+      mat-list-item {
+        margin: 0;
+        border-bottom: 1px solid #ccc;
+        height: 50px;
+        font-size: 14px;
+        cursor: pointer;
+
+        &:active {
+          color: blue;
+          font-size: 15px;
+          outline: none;
+        }
+
+        &:focus {
+          color: blue;
+          font-size: 15px;
+          outline: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,291 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import './assets/ext_lib/css/variable.scss';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #eee;
+}
+
+.row {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  .col,
+  .col-1,
+  .col-10,
+  .col-11,
+  .col-12,
+  .col-2,
+  .col-3,
+  .col-4,
+  .col-5,
+  .col-6,
+  .col-7,
+  .col-8,
+  .col-9,
+  .col-auto,
+  .col-lg,
+  .col-lg-1,
+  .col-lg-10,
+  .col-lg-11,
+  .col-lg-12,
+  .col-lg-2,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-8,
+  .col-lg-9,
+  .col-lg-auto,
+  .col-md,
+  .col-md-1,
+  .col-md-10,
+  .col-md-11,
+  .col-md-12,
+  .col-md-2,
+  .col-md-3,
+  .col-md-4,
+  .col-md-5,
+  .col-md-6,
+  .col-md-7,
+  .col-md-8,
+  .col-md-9,
+  .col-md-auto,
+  .col-sm,
+  .col-sm-1,
+  .col-sm-10,
+  .col-sm-11,
+  .col-sm-12,
+  .col-sm-2,
+  .col-sm-3,
+  .col-sm-4,
+  .col-sm-5,
+  .col-sm-6,
+  .col-sm-7,
+  .col-sm-8,
+  .col-sm-9,
+  .col-sm-auto,
+  .col-xl,
+  .col-xl-1,
+  .col-xl-10,
+  .col-xl-11,
+  .col-xl-12,
+  .col-xl-2,
+  .col-xl-3,
+  .col-xl-4,
+  .col-xl-5,
+  .col-xl-6,
+  .col-xl-7,
+  .col-xl-8,
+  .col-xl-9,
+  .col-xl-auto {
+    margin: 0 !important;
+    padding: 0 0.5rem !important;
+
+    .right-panel {
+      text-align: right;
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+
+      button {
+        width: 10%;
+        margin-right: 0.5rem;
+      }
+
+      mat-form-field {
+        width: 20%;
+      }
+    }
+  }
+}
+
+button {
+  &:focus {
+    outline: none;
+  }
+}
+
+.my-table-card {
+  padding: 0 !important;
+  margin: 1rem auto;
+  width: 100%;
+  box-shadow: $boxShadow;
+
+  .info-panel {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    margin-bottom: 0.5rem;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    box-shadow: $boxShadow;
+
+    .title {
+      text-transform: capitalize;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .side-btn {
+    float: right;
+    margin: 1rem;
+    margin-bottom: 0;
+  }
+
+  mat-form-field {
+    width: 100%;
+    padding: 0 2rem;
+  }
+
+  .my-iift-table {
+    table {
+      width: 100% !important;
+
+      th {
+        text-align: center;
+      }
+
+      td {
+        button {
+          background-color: $primaryColor;
+          color: #fff;
+          height: 28px;
+          width: 28px;
+          line-height: 28px;
+          margin-right: 0.5rem;
+
+          mat-icon {
+            font-size: 18px;
+            vertical-align: sub;
+          }
+        }
+      }
+    }
+  }
+}
+
+.my-mat-table-card {
+  padding: 0 !important;
+  margin: 1rem auto;
+  width: 100%;
+
+  table {
+    width: 100%;
+    margin: 0 auto;
+    border-bottom: 1px solid #ccc;
+
+    button {
+      border: 2px solid #ccc;
+      height: 32px;
+      width: 32px;
+      line-height: 22px;
+      margin-right: 0.6rem;
+
+      mat-icon {
+        font-size: 18px;
+        line-height: 19px;
+      }
+    }
+
+    thead {
+      th {
+        border-top: none;
+        vertical-align: middle;
+        border-bottom: 2px solid #dee2e6;
+        font-size: 14px;
+        padding: 0.5rem;
+        text-align: left;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #ccc;
+
+        td {
+          vertical-align: middle;
+          padding: 1rem 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.input-pwd {
+  -webkit-text-security: square !important;
+}
+
+.row {
+  margin: 0 auto !important;
+}
+
+.my-modal {
+  // background-color: transparent;
+  padding-top: 2rem;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+
+  .my-modal-content {
+    background-color: transparent;
+    border-top-right-radius: 36px;
+    border-bottom-left-radius: 36px;
+
+    .form-radio-btn {
+      margin: 1rem auto;
+      margin-bottom: 0;
+    }
+
+    .my-modal-header {
+      border-top-right-radius: 36px;
+      padding: 0.5rem 1rem;
+      background-color: $primaryColor !important;
+      box-shadow: $boxShadow !important;
+
+      h2 {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      button {
+        float: right;
+        border: 2px solid #fff;
+        width: 32px;
+        height: 32px;
+        margin: 0.5rem auto;
+        line-height: 32px;
+
+        mat-icon {
+          color: #fff;
+          font-size: 18px;
+          line-height: 19px;
+        }
+      }
+    }
+
+    .my-modal-container {
+      background-color: #fff;
+      padding: 1rem !important;
+    }
+
+    .my-modal-footer {
+      border-bottom-left-radius: 36px;
+      padding: 1rem;
+      background-color: $primaryColor !important;
+      box-shadow: $boxShadow !important;
+
+      .my-modal-btn {
+        float: right;
+      }
+    }
+  }
+}

@@ -1,0 +1,257 @@
+<!-- add product modal -->
+<div id="createProductModal" class="w3-modal my-modal">
+  <div class="w3-modal-content w3-card-4 my-modal-content">
+    <form [formGroup]="addProductForm">
+      <header class="w3-container w3-black my-modal-header">
+        <button mat-icon-button (click)="toggleModal('createProductModal', 'none')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <h2>Add Product</h2>
+      </header>
+
+      <div class="w3-container my-modal-container row">
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Name" formControlName="name" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Brand" formControlName="brand" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Purchasing Price" formControlName="buyingPrice" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Selling Price" formControlName="sellingPrice" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Quantity" formControlName="quantity" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput [matDatepicker]="Picker" placeholder="Date Of Purchase" formControlName="addedOn" required>
+          <mat-datepicker-toggle matSuffix [for]="Picker"></mat-datepicker-toggle>
+          <mat-datepicker #Picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <mat-label>Purchased By</mat-label>
+          <mat-select formControlName="addedBy" required>
+            <ng-container *ngFor="let user of users">
+              <mat-option [value]="user.name">{{ user?.name |titlecase}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <footer class="w3-container w3-black my-modal-footer">
+        <div class="my-modal-btn">
+          <button mat-raised-button color="primary" (click)="addProduct()"
+            [disabled]="addProductForm.invalid">Save</button>
+        </div>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<!-- update product -->
+<div id="updateProductModal" class="w3-modal my-modal">
+  <div class="w3-modal-content w3-card-4 my-modal-content">
+    <header class="w3-container w3-black my-modal-header">
+      <button mat-icon-button (click)="toggleModal('updateProductModal', 'none')">
+        <mat-icon>close</mat-icon>
+      </button>
+      <h2>Update Product</h2>
+    </header>
+
+    <div class="w3-container my-modal-container row">
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Name" [(ngModel)]="selectedProduct.name" name="name" required>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Brand" [(ngModel)]="selectedProduct.brand" name="brand" required>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Purchasing Price" [(ngModel)]="selectedProduct.buyingPrice" name="buyingPrice"
+          required>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Selling Price" [(ngModel)]="selectedProduct.sellingPrice" name="sellingPrice"
+          required>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Quantity" [(ngModel)]="selectedProduct.quantity" name="quantity" required>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput [matDatepicker]="updatePicker" placeholder="Date Of Purchase"
+          [(ngModel)]="selectedProduct.addedOn" name="addedOn" required>
+        <mat-datepicker-toggle matSuffix [for]="updatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #updatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <mat-label>Purchased By</mat-label>
+        <mat-select [(value)]="selectedProduct.addedBy" required>
+          <ng-container *ngFor="let user of users">
+            <mat-option [value]="user.name">{{ user?.name |titlecase}}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <footer class="w3-container w3-black my-modal-footer">
+      <div class="my-modal-btn">
+        <button mat-raised-button color="primary" (click)="updateProduct()">Update</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- product sell modal -->
+<div id="sellProductModal" class="w3-modal my-modal">
+  <div class="w3-modal-content w3-card-4 my-modal-content">
+    <form [formGroup]="sellProductForm">
+      <header class="w3-container w3-black my-modal-header">
+        <button mat-icon-button (click)="toggleModal('sellProductModal', 'none')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <h2>Sell Products</h2>
+      </header>
+
+      <div class="w3-container my-modal-container row">
+        <mat-form-field class="col-12 col-md-6">
+          <mat-label>Selled By</mat-label>
+          <mat-select formControlName="selledBy" required>
+            <ng-container *ngFor="let user of users">
+              <mat-option [value]="user.name">{{ user?.name |titlecase}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-12 col-md-6">
+          <mat-label>Select Product</mat-label>
+          <mat-select formControlName="name" required>
+            <ng-container *ngFor="let product of products">
+              <mat-option [value]="product.name">{{ product?.name |titlecase}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Quantity" formControlName="quantity" name="quantity" required>
+        </mat-form-field>
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Unit Price" formControlName="unit_price" name="unit_price" required>
+        </mat-form-field>
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Total Price" formControlName="total_price" name="total_price" required>
+        </mat-form-field>
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput [matDatepicker]="sellPicker" placeholder="Date Of Sell" formControlName="date_of_sell"
+            name="date_of_sell" required>
+          <mat-datepicker-toggle matSuffix [for]="sellPicker"></mat-datepicker-toggle>
+          <mat-datepicker #sellPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <input matInput placeholder="Description" formControlName="description" name="description" />
+        </mat-form-field>
+      </div>
+
+      <footer class="w3-container w3-black my-modal-footer">
+        <div class="my-modal-btn">
+          <button mat-raised-button color="primary" (click)="sellProduct();"
+            [disabled]="sellProductForm.invalid">Save</button>
+        </div>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<div class="products-container">
+  <mat-card class="table-responsive my-table-card">
+    <div class="info-panel">
+      <h2 class="title">products information</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="right-panel">
+          <button mat-raised-button color="primary" (click)="toggleModal('createProductModal', 'block')">
+            <mat-icon>add</mat-icon>Add Product
+          </button>
+
+          <button mat-raised-button color="primary" (click)="toggleModal('sellProductModal', 'block')">Sell
+            Products</button>
+        </div>
+      </div>
+      <div class="col-12">
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filter member here...">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="my-iift-table">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.name |titlecase}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="brand">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Brand </th>
+          <td mat-cell *matCellDef="let row"> {{row.brand |uppercase}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="buyingPrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Buying Price </th>
+          <td mat-cell *matCellDef="let row"> {{row.buyingPrice}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sellingPrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Selling Price </th>
+          <td mat-cell *matCellDef="let row"> {{row.sellingPrice}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="addedBy">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Added By </th>
+          <td mat-cell *matCellDef="let row"> {{row.addedBy |titlecase}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="addedOn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
+          <td mat-cell *matCellDef="let row"> {{row.addedOn |date: 'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock </th>
+          <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button class="mr-2" (click)="selectProduct(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteProduct(row)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </mat-card>
+</div>

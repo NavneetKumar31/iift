@@ -1,0 +1,346 @@
+<div id="accountModal" class="w3-modal my-modal">
+  <div class="w3-modal-content w3-card-4 my-modal-content">
+    <header class="w3-container w3-black my-modal-header">
+      <button mat-icon-button (click)="toggleModal('accountModal', 'none')">
+        <mat-icon>close</mat-icon>
+      </button>
+      <h2>{{ selectedAccount?.name |titlecase }}'s Account Details</h2>
+    </header>
+
+    <div class="w3-container my-modal-container">
+      <mat-tab-group>
+        <mat-tab label="Added Member">
+          <div class="col-wrapper">
+            <mat-card class="table-responsive my-table-card">
+              <div class="right-panel">
+                <mat-form-field class="my-mat-select">
+                  <mat-label>Select Month</mat-label>
+                  <mat-select>
+                    <ng-container *ngFor="let month of months">
+                      <mat-option value="month" (click)="filterMembersByMonth(month);"> {{ month?.name |titlecase }}
+                      </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilterMembers($event)" placeholder="Filter member here...">
+              </mat-form-field>
+
+              <div class="my-iift-table">
+                <table mat-table [dataSource]="dataSourceMembers" matSort>
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name |titlecase}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="fees">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fees </th>
+                    <td mat-cell *matCellDef="let row"> {{row.fees}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="date_of_added">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Added On </th>
+                    <td mat-cell *matCellDef="let row"> {{row.date_of_added |date: 'MMM dd, yyyy'}} </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsMembers"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsMembers;">
+                  </tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+              </div>
+            </mat-card>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Selled Products">
+          <div class="col-wrapper">
+            <mat-card class="table-responsive my-table-card">
+              <div class="right-panel">
+                <mat-form-field class="my-mat-select">
+                  <mat-label>Select Month</mat-label>
+                  <mat-select>
+                    <ng-container *ngFor="let month of months">
+                      <mat-option value="month" (click)="filterProductsByMonth(month);"> {{ month?.name |titlecase }}
+                      </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilterMembers($event)" placeholder="Filter member here...">
+              </mat-form-field>
+
+              <div class="my-iift-table">
+                <table mat-table [dataSource]="dataSourceProducts" matSort>
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name |titlecase}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> quantity </th>
+                    <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="unit_price">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Unit Price </th>
+                    <td mat-cell *matCellDef="let row"> {{row.unit_price}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="total_price">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Amount </th>
+                    <td mat-cell *matCellDef="let row"> {{row.total_price}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="date_of_sell">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Of Sell </th>
+                    <td mat-cell *matCellDef="let row"> {{row.date_of_sell |date: 'MMM dd, yyyy'}} </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsProducts"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsProducts;">
+                  </tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+              </div>
+            </mat-card>
+          </div>
+        </mat-tab>
+        <mat-tab label="Spend Information">
+          <div class="col-wrapper">
+            <mat-card class="table-responsive my-table-card">
+              <div class="right-panel">
+                <mat-form-field class="my-mat-select">
+                  <mat-label>Select Month</mat-label>
+                  <mat-select>
+                    <ng-container *ngFor="let month of months">
+                      <mat-option value="month" (click)="filterSpendsByMonth(month);"> {{ month?.name |titlecase }}
+                      </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilterSpend($event)" placeholder="Filter spends here...">
+              </mat-form-field>
+
+              <div class="my-iift-table">
+                <table mat-table [dataSource]="dataSourceSpends" matSort>
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name |titlecase}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                    <td mat-cell *matCellDef="let row"> {{ row.type |titlecase }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                    <td mat-cell *matCellDef="let row"> {{row.amount}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                    <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="date_of_spend">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Of Spend </th>
+                    <td mat-cell *matCellDef="let row"> {{row.date_of_spend |date: 'MMM dd, yyyy'}} </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsSpends"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsSpends;">
+                  </tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+              </div>
+            </mat-card>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
+
+<div id="spendModal" class="w3-modal my-modal">
+  <div class="w3-modal-content w3-card-4 my-modal-content">
+    <form [formGroup]="spendForm">
+      <header class="w3-container w3-black my-modal-header">
+        <button mat-icon-button (click)="toggleModal('spendModal', 'none')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <h2>Add Spend</h2>
+      </header>
+
+      <div class="w3-container my-modal-container row">
+        <mat-form-field class="col-12 col-md-6">
+          <mat-label>Selled By</mat-label>
+          <mat-select formControlName="spendBy" required>
+            <ng-container *ngFor="let account of accounts">
+              <mat-option [value]="account.name">{{ account?.name |titlecase}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Name" formControlName="name" name="name" required>
+        </mat-form-field>
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Description" formControlName="description" name="description" required>
+        </mat-form-field>
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Amount" formControlName="amount" name="amount" required>
+        </mat-form-field>
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Type" formControlName="type" name="type" required>
+        </mat-form-field>
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput [matDatepicker]="spendPicker" placeholder="Date Of Spend" formControlName="date_of_spend"
+            name="date_of_spend" required>
+          <mat-datepicker-toggle matSuffix [for]="spendPicker"></mat-datepicker-toggle>
+          <mat-datepicker #spendPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <footer class="w3-container w3-black my-modal-footer">
+        <div class="my-modal-btn">
+          <button mat-raised-button color="primary" (click)="addSpend();" [disabled]="spendForm.invalid">Save</button>
+        </div>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<div id="fathersModal" class="w3-modal my-modal">
+  <div class="w3-modal-content w3-card-4 my-modal-content">
+    <header class="w3-container w3-black my-modal-header">
+      <button mat-icon-button (click)="toggleModal('fathersModal', 'none')">
+        <mat-icon>close</mat-icon>
+      </button>
+      <h2>{{ (selectedUser?.name |titlecase) + "'s leader details"}}</h2>
+    </header>
+
+    <div class="w3-container my-modal-container row">
+      <mat-card class="commission-card my-mat-table-card table-responsive">
+        <table>
+          <thead>
+            <th>Father</th>
+            <th>Level</th>
+            <th class="text-center">Commission Rate</th>
+            <th class="text-center">Income</th>
+            <th class="text-center">Total Commission</th>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let father of selectedUser?.fatherDetails">
+              <tr>
+                <td> {{ father?.name |titlecase }} </td>
+                <td> {{ father?.level |titlecase }} </td>
+                <td class="text-center">
+                  <input placeholder="Enter Commission..." [(ngModel)]="father.commission" />
+                </td>
+                <td class="text-center">
+                  <input placeholder="Enter Income..." [(ngModel)]="father.income" />
+                </td>
+                <td class="text-center">
+                  {{ father?.total }}
+                  <button mat-raised-button color="primary"
+                    (click)="father.total = father.commission * father.income / 100;">Get</button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="accounts-container">
+  <mat-card class="table-responsive my-table-card">
+    <div class="info-panel">
+      <h2 class="title">accounts information</h2>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="right-panel">
+          <button mat-raised-button color="primary" (click)="toggleModal('spendModal', 'block')">
+            <mat-icon>add</mat-icon>Add Spend
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filter member here...">
+    </mat-form-field>
+
+    <div class="my-iift-table">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.name |titlecase}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total_earned_amount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Earned Amount </th>
+          <td mat-cell *matCellDef="let row"> {{row.total_earn_amount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total_spend_amount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Spend Amount </th>
+          <td mat-cell *matCellDef="let row"> {{row.total_spend_amount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total_added_members">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Added Members </th>
+          <td mat-cell *matCellDef="let row"> {{row.addedMembers.length}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total_selled_products">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Selled Products </th>
+          <td mat-cell *matCellDef="let row"> {{row.selledProducts.length}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="last_updated">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Updated On </th>
+          <td mat-cell *matCellDef="let row"> {{row.modifiedOn |date: 'MMM dd, yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)="selectAccount(row);">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="getFathersDetails(row?.name);">
+              <mat-icon>explore</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </mat-card>
+</div>

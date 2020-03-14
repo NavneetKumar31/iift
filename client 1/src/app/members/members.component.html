@@ -1,0 +1,372 @@
+<!-- create member modal -->
+<div id="createMemberModal" class="w3-modal my-modal">
+  <div class="w3-modal-content w3-card-4 my-modal-content">
+    <form [formGroup]="createForm">
+      <header class="w3-container w3-black my-modal-header">
+        <button mat-icon-button (click)="toggleModal('createMemberModal', 'none')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <h2>Create Member</h2>
+      </header>
+
+      <div class="w3-container my-modal-container row">
+        <div class="form-radio-btn col-12">
+          <mat-radio-group formControlName="role">
+            <mat-radio-button class="col-6" *ngFor="let role of ['member', 'volunteer']" [value]="role">
+              {{ role |titlecase }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <mat-form-field class="col-12">
+          <mat-label>Added By</mat-label>
+          <mat-select formControlName="addedBy" required>
+            <ng-container *ngFor="let user of users">
+              <mat-option [value]="user.name">{{ user?.name |titlecase }}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Name" formControlName="name" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Father/Husband name" formControlName="fatherHusbandName" />
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="ID" formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Mobile no." formControlName="mobile" />
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="male">Male</mat-option>
+            <mat-option value="female">Female</mat-option>
+            <mat-option value="other">Other</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput [matDatepicker]="dobPicker" placeholder="Date of Birth" formControlName="dob" />
+          <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+          <mat-datepicker #dobPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <mat-label>Maritial Status</mat-label>
+          <mat-select formControlName="maritialStatus">
+            <mat-option value="married">Married</mat-option>
+            <mat-option value="single">Single</mat-option>
+            <mat-option value="divorcee">Divorcee</mat-option>
+            <mat-option value="widow">Widow</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <mat-label>Caste</mat-label>
+          <mat-select formControlName="caste">
+            <mat-option value="general">General</mat-option>
+            <mat-option value="other backward caste">Other Backward Caste</mat-option>
+            <mat-option value="schedule caste">Schedule Caste</mat-option>
+            <mat-option value="schedule tribe">Schedule Tribe</mat-option>
+            <mat-option value="others">Others</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <mat-label>Highest Education</mat-label>
+          <mat-select formControlName="highestEducation">
+            <mat-option value="primary">Primary (8th)</mat-option>
+            <mat-option value="highschool">HighSchool (10th)</mat-option>
+            <mat-option value="intermediate">Intermediate (12th)</mat-option>
+            <mat-option value="graduate">Graduate</mat-option>
+            <mat-option value="post graduate">Post Graduate</mat-option>
+            <mat-option value="others">Others</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Fees" formControlName="fees" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Product Quantity" formControlName="addressLine" />
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="City" formControlName="city" />
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="District" formControlName="district" />
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="State" formControlName="state" />
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Country" formControlName="country" />
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+          <input matInput placeholder="Pincode" formControlName="pincode" />
+        </mat-form-field>
+      </div>
+
+      <footer class="w3-container w3-black my-modal-footer">
+        <div class="my-modal-btn">
+          <button mat-raised-button color="primary" (click)="createMember()"
+            [disabled]="createForm.invalid">Save</button>
+        </div>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<!-- edit member modal -->
+<div id="updateMemberModal" class="w3-modal my-modal">
+  <div class="w3-modal-content w3-card-4 my-modal-content">
+    <!-- <form> -->
+    <header class="w3-container w3-black my-modal-header">
+      <button mat-icon-button (click)="toggleModal('updateMemberModal', 'none')">
+        <mat-icon>close</mat-icon>
+      </button>
+      <h2>Update Member</h2>
+    </header>
+
+    <div class="w3-container my-modal-container row">
+      <div class="form-radio-btn col-12">
+        <mat-radio-group [(ngModel)]="selectedUser.role">
+          <mat-radio-button class="col-6" *ngFor="let role of ['member', 'volunteer']" [value]="role">
+            {{ role |titlecase }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <mat-form-field class="col-12">
+        <mat-label>Added By</mat-label>
+        <mat-select [(value)]="selectedUser.addedBy" required>
+          <ng-container *ngFor="let user of users">
+            <mat-option [value]="user.name">{{ user?.name |titlecase }}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Name" name="name" [(ngModel)]="selectedUser.name" required>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Father/Husband name" name="fatherName"
+          [(ngModel)]="selectedUser.fatherHusbandName" />
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="ID" name="email" [(ngModel)]="selectedUser.email" />
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Mobile no." name="mobile" [(ngModel)]="selectedUser.mobile" />
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <mat-label>Gender</mat-label>
+        <mat-select [(value)]="selectedUser.gender">
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput [matDatepicker]="dobPicker1" name="dob" placeholder="Date of Birth"
+          [(ngModel)]="selectedUser.dob" />
+        <mat-datepicker-toggle matSuffix [for]="dobPicker1"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <mat-label>Maritial Status</mat-label>
+        <mat-select [(value)]="selectedUser.maritialStatus">
+          <mat-option value="married">Married</mat-option>
+          <mat-option value="single">Single</mat-option>
+          <mat-option value="divorcee">Divorcee</mat-option>
+          <mat-option value="widow">Widow</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <mat-label>Caste</mat-label>
+        <mat-select [(value)]="selectedUser.caste">
+          <mat-option value="general">General</mat-option>
+          <mat-option value="other backward caste">Other Backward Caste</mat-option>
+          <mat-option value="schedule caste">Schedule Caste</mat-option>
+          <mat-option value="schedule tribe">Schedule Tribe</mat-option>
+          <mat-option value="others">Others</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <mat-label>Highest Education</mat-label>
+        <mat-select [(value)]="selectedUser.highestEducation">
+          <mat-option value="primary">Primary (8th)</mat-option>
+          <mat-option value="highschool">HighSchool (10th)</mat-option>
+          <mat-option value="intermediate">Intermediate (12th)</mat-option>
+          <mat-option value="graduate">Graduate</mat-option>
+          <mat-option value="post graduate">Post Graduate</mat-option>
+          <mat-option value="others">Others</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Fees" name="fees" [(ngModel)]="selectedUser.fees" required>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Product Quantity" name="addLine" [(ngModel)]="selectedUser.address.addressLine" />
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="City" name="city" [(ngModel)]="selectedUser.address.city" />
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="District" name="district" [(ngModel)]="selectedUser.address.district" />
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="State" name="state" [(ngModel)]="selectedUser.address.state" />
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Country" name="country" [(ngModel)]="selectedUser.address.country" />
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="Pincode" name="pincode" [(ngModel)]="selectedUser.address.pincode" />
+      </mat-form-field>
+    </div>
+
+    <footer class="w3-container w3-black my-modal-footer">
+      <div class="my-modal-btn">
+        <button mat-raised-button color="primary" (click)="updateUser()">Update</button>
+      </div>
+    </footer>
+    <!-- </form> -->
+  </div>
+</div>
+
+<div class="members-container">
+  <mat-card class="table-responsive my-table-card">
+    <div class="info-panel">
+      <h2 class="title">members information</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="right-panel">
+          <button mat-raised-button color="primary" (click)="toggleModal('createMemberModal', 'block')">
+            <mat-icon>add</mat-icon> Add Member
+          </button>
+
+          <mat-form-field class="my-mat-select">
+            <mat-label>Select Role</mat-label>
+            <mat-select [(value)]="selectedRole">
+              <mat-option value="all" (click)="changeUserType();">All</mat-option>
+              <mat-option value="admin" (click)="changeUserType();">Admin</mat-option>
+              <mat-option value="member" (click)="changeUserType();">Member</mat-option>
+              <mat-option value="volunteer" (click)="changeUserType();">Volunteer</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="my-mat-select">
+            <mat-label>Select Month</mat-label>
+            <mat-select>
+              <ng-container *ngFor="let month of months">
+                <mat-option value="month" (click)="filterByMonth(month);"> {{ month?.name |titlecase }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-12">
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filter member here...">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="my-iift-table">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.name |titlecase}} </td>
+        </ng-container>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+          <td mat-cell *matCellDef="let row"> {{row.role |uppercase}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+          <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="mobile">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </th>
+          <td mat-cell *matCellDef="let row"> {{row.mobile}} </td>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="addedBy">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Added By </th>
+          <td mat-cell *matCellDef="let row"> {{row.addedBy |titlecase }} </td>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="registeredOn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Registered On </th>
+          <td mat-cell *matCellDef="let row"> {{row.registeredOn |date: 'MMM dd, yyyy'}} </td>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
+          <td mat-cell *matCellDef="let row"> {{row.address?.city |titlecase}} </td>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button class="mr-2" (click)="selectUser(row)" [disabled]="row.role === 'admin'">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteUser(row)" [disabled]="row.role === 'admin'">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </mat-card>
+</div>

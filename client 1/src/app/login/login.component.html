@@ -1,0 +1,25 @@
+<div class="login-container">
+  <button mat-fab color="primary" class="home-btn" (click)="routeTo('home')">
+    <mat-icon>home</mat-icon>
+  </button>
+  <mat-card class="login-card">
+    <div class="card-header-img">
+      <img src="../../assets/imgs/logos/iifft_logo.jpeg" alt="IIFT Logo">
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="authenticateUser()">
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput class="input-pwd" placeholder="Password" formControlName="password">
+      </mat-form-field>
+
+      <div class="form-btn">
+        <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">Login</button>
+        <p>If you are new then click here to register?</p>
+        <button mat-raised-button color="accent" (click)="routeTo('register')">Register</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

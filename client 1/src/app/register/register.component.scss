@@ -1,0 +1,50 @@
+.register-container {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  background-image: url('../../assets/imgs/bg/login_bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .home-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
+
+  .register-card {
+    width: fit-content;
+    margin: 0 auto;
+    top: 15%;
+
+    .card-header-img {
+      text-align: center;
+
+      img {
+        width: 10rem;
+        height: 10rem;
+      }
+    }
+
+    form {
+      mat-form-field {
+        width: 100%;
+      }
+
+      .form-btn {
+        text-align: center;
+
+        button {
+          width: 100%;
+        }
+
+        p {
+          margin: 1rem auto;
+          margin-bottom: 0.3rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import '../../assets/ext_lib/css/variable.scss';
+
+.about-container {
+  .developer-card {
+    margin: 5rem auto;
+    max-width: 50%;
+    box-shadow: $boxShadow !important;
+
+    .developer-card-header-image {
+      background-image: url("../../assets/imgs/pics/my_pic.jpg");
+      background-size: cover;
+    }
+
+    mat-card-content {
+      p {
+        text-align: justify;
+      }
+    }
+
+    mat-card-actions {
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom: -8px;
+      padding: 0.5rem 0;
+      padding-left: 0rem;
+      padding-bottom: 0;
+      border-top: 1px solid #ccc;
+
+      a {
+        width: 31%;
+        margin: 0 auto;
+        margin-right: 1rem;
+      }
+    }
+  }
+}

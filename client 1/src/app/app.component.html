@@ -1,0 +1,38 @@
+<div class="app-container">
+  <mat-drawer-container class="app-container-container" autosize>
+    <mat-drawer #drawer class="app-container-sidenav" mode="over" closed>
+      <ng-template [ngIf]="isUserLoggedIn">
+        <app-header></app-header>
+      </ng-template>
+    </mat-drawer>
+
+    <div class="app-container-sidenav-content">
+      <mat-toolbar>
+        <ng-template [ngIf]="isUserLoggedIn">
+          <button mat-icon-button mat-button class="mr-3" (click)="drawer.toggle();">
+            <mat-icon> menu </mat-icon>
+          </button>
+        </ng-template>
+        <h4>Indian Innovators Foundation Trust</h4>
+
+        <ng-template [ngIf]="!isUserLoggedIn">
+          <button mat-raised-button color="primary" class="login-btn" (click)="routeTo('login')">Login</button>
+        </ng-template>
+      </mat-toolbar>
+
+      <ng-template [ngIf]="showMsgPanel">
+        <mat-card class="msg-panel" [ngClass]="msg.severity" [@fadeIn&fadeOut]>
+          <mat-card-content>
+            <p class="text-center" style="font-size:20px;"><strong>{{ msg?.severity |uppercase }}</strong></p>
+            <p><strong>{{ msg?.msg |titlecase }}</strong></p>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+
+
+      <router-outlet></router-outlet>
+      <!-- <app-footer></app-footer> -->
+    </div>
+
+  </mat-drawer-container>
+</div>

@@ -1,0 +1,50 @@
+<div class="header-container">
+  <div class="profile-info-panel">
+    <div class="profile-pic">
+      <img src="../../assets/imgs/logos/iifft_logo.jpeg" alt="user pictures">
+    </div>
+    <ng-container *ngIf="isUserLoggedIn">
+      <button mat-raised-button [matMenuTriggerFor]="userMenu" color="primary">
+        {{ user?.name |titlecase }}
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          Settings
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="signOut()">
+          <mat-icon>exit_to_app</mat-icon>
+          Sign Out
+        </button>
+      </mat-menu>
+    </ng-container>
+    <ng-container *ngIf="!isUserLoggedIn">
+      <button mat-raised-button (click)="routeTo('login')" color="primary">Login</button>
+    </ng-container>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="navigation-panel">
+    <mat-list role="list">
+      <mat-list-item role="listitem" routerLink="home" routerLinkActive="active-list">
+        <mat-icon mat-list-icon>home</mat-icon>
+        Home
+      </mat-list-item>
+      <mat-list-item role="listitem" routerLink="/members" routerLinkActive="active-list">
+        <mat-icon mat-list-icon>group</mat-icon>
+        Members
+      </mat-list-item>
+      <mat-list-item role="listitem" routerLink="/products" routerLinkActive="active-list">
+        <mat-icon mat-list-icon>store</mat-icon>
+        Products
+      </mat-list-item>
+      <mat-list-item role="listitem" routerLink="/accounts" routerLinkActive="active-list">
+        <mat-icon mat-list-icon>account_box</mat-icon>
+        Acocunts
+      </mat-list-item>
+      <mat-list-item role="listitem" routerLink="/about" routerLinkActive="active-list">About Us</mat-list-item>
+    </mat-list>
+  </div>
+</div>

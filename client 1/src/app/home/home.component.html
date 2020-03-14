@@ -1,0 +1,31 @@
+<div class="home-container">
+  <div class="banner-wrapper">
+    <figure>
+      <img [src]="currentBanner?.img" alt="">
+      <p> {{ currentBanner?.text }} </p>
+      <div class="control-panel">
+        <button mat-icon-button class="btn pre-btn" (click)="changeBanner('pre')">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <button mat-icon-button class="btn next-btn" (click)="changeBanner('next')">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+    </figure>
+  </div>
+
+  <div class="content-wrapper">
+    <ng-container *ngFor="let content of contents">
+      <div class="card-wrapper">
+        <div class="content-card">
+          <div class="header">
+            <p class="title"> {{ content?.title |titlecase }} </p>
+          </div>
+          <div class="content">
+            <p class="content"> {{ content?.content }} </p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
