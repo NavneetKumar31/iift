@@ -1,0 +1,32 @@
+{
+  "name": "iift_server",
+  "version": "1.0.0",
+  "description": "express server for iift",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Navneet Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "*",
+    "bluebird": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "crypto-js": "^3.1.9-1",
+    "express": "*",
+    "gridfs-stream": "*",
+    "jquery": "*",
+    "jsonwebtoken": "*",
+    "method-override": "*",
+    "mongoose": "*",
+    "mongoose-paginate": "*",
+    "morgan": "*",
+    "multer": "*",
+    "multer-gridfs-storage": "*",
+    "nodemailer": "*",
+    "nodemon": "^2.0.1",
+    "passport": "*",
+    "passport-jwt": "*"
+  }
+}
